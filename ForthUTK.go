@@ -37,7 +37,6 @@ import (
 	"os/signal"
 	"path/filepath"
 	"regexp"
-	"strings"
 
 	"github.com/linuxboot/fiano/pkg/uefi"
 	"github.com/linuxboot/fiano/pkg/visitors"
@@ -116,8 +115,6 @@ func init() {
 		{"run", "Run the UTK command at TOS[0] with the args from the stack", run},
 		{"splat", "Replace files named .*Shell.* with the file at TOS[0]", splat},
 		{"clean", "Clean the image. Runs DXECLEAN script for each iteration. Leaves artifact names in a []string at TOS[0]", clean},
-		// TODO: new words for forth package to move to u-root.
-		{"drop", "Drop TOS[0]", drop},
 		{"help", "Print a help message", help},
 	}
 }
@@ -527,18 +524,19 @@ func ix(f forth.Forth) {
 func main() {
 	f := forth.New()
 	for _, c := range commands {
-		forth.NewWord(f, c.c, c.f)
+		forth.Putop(c.c, c.f)
 	}
 	var b = make([]byte, 512)
 	flag.Parse()
 	// first process the args
-	if err := forth.Eval(f, strings.Join(flag.Args(), " ")); err != nil {
-		log.Printf("%v", err)
+	for _, a := range flag.Args() {
+		if err := forth.EvalString(f, a); err != nil {
+			log.Printf("%v", err)
+		}
 	}
 
 	for {
-		fmt.Printf("%v", f.Stack())
-		fmt.Print("OK ")
+		fmt.Printf("%vOK ", f.Stack())
 		n, err := os.Stdin.Read(b)
 		if err != nil {
 			if err != io.EOF {
@@ -547,7 +545,7 @@ func main() {
 			// Silently exit on EOF. It's the unix way.
 			break
 		}
-		if err := forth.Eval(f, string(b[:n])); err != nil {
+		if err := forth.EvalString(f, string(b[:n])); err != nil {
 			fmt.Printf("%v\n", err)
 		}
 	}
