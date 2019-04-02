@@ -1,0 +1,8 @@
+github.com/linuxboot/fiano v5.0.0+incompatible h1:DZAZO0z9l35cakTNnkdh+yWRZfzCCJnDHmPAYW/t0No=
+github.com/linuxboot/fiano v5.0.0+incompatible/go.mod h1:IPKmAwYdbidivI8+nWCBO97QkdsiF8OThAHowU8Tvdk=
+github.com/u-root/u-root v4.0.0+incompatible h1:xSVgoUpJbfQEuFem81g0muGsgd+/92iY4F7gp6wYUFQ=
+github.com/u-root/u-root v4.0.0+incompatible/go.mod h1:RYkpo8pTHrNjW08opNd/U6p/RJE7K0D8fXO0d47+3YY=
+github.com/ulikunitz/xz v0.5.5 h1:pFrO0lVpTBXLpYw+pnLj6TbvHuyjXMfjGeCwSqCVwok=
+github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
+golang.org/x/text v0.3.0 h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg=
+golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
